@@ -28,6 +28,6 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs"
-  ],
+, "src/utils/parseEventData/parseEventDate.test.js", "src/utils/parseEventData/parseEventData.ts"  ],
   "exclude": ["node_modules"]
 }

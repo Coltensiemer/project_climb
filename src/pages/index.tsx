@@ -1,21 +1,28 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
-
 import { api } from "~/utils/api";
 
+
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  
 
   return (
     <>
-      
-      <p>Hello world</p>
-     
+      <div>
+        <p>Hi</p>
+        </div>
     </>
   );
 }
 
+
+
+
+
+
+
+// default T3 stack for login- will study to learn - CRS
 function AuthShowcase() {
   const { data: sessionData } = useSession();
 
