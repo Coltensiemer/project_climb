@@ -64,3 +64,14 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+model USAClimbingEvents {
+    id      String            @id
+    results USAEventResults[]
+}
+
+model USAEventResults {
+    id      String            @id @default(cuid())
+    event   USAClimbingEvents @relation(fields: [eventid], references: [id])
+    eventid String
+}
