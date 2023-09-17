@@ -8,7 +8,9 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "db-start": "npx supabase start", 
+    "db-stop": "npx supabase stop"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -43,6 +45,7 @@
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.5.1",
     "prisma": "^5.3.1",
+    "supabase": "^1.93.0",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6"
   },
