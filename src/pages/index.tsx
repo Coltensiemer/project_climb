@@ -3,19 +3,18 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { api } from "~/utils/api";
-import { Button} from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-
+import Header from "~/components/Header";
+import HeroLanding from "~/components/HeroLanding";
 
 export default function Home() {
   
 
   return (
     <>
+    <Header /> 
+    <HeroLanding />
       <div>
         <p className="bg-red-500">Hi</p>
-        <Button>Click Me</Button>
-      <Textarea /> 
         </div>
     </>
   );
