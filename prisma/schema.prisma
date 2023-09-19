@@ -67,6 +67,7 @@ model VerificationToken {
 
 model USAClimbingEvents {
     id      String            @id
+    event   String
     results USAEventResults[]
 }
 
