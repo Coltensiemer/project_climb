@@ -2,6 +2,9 @@
   "name": "project_climb",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "ts-node --esm prisma/seed.ts"
+  },
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -38,7 +41,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
-    "@types/node": "^18.16.0",
+    "@types/node": "^18.17.17",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
@@ -53,7 +56,8 @@
     "prisma": "^5.3.1",
     "supabase": "^1.93.0",
     "tailwindcss": "^3.3.3",
-    "typescript": "^5.1.6"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   },
   "ct3aMetadata": {
     "initVersion": "7.19.0"
