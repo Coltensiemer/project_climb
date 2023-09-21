@@ -31,6 +31,9 @@ const getUSAClimbingEvents = (): Prisma.USAClimbingEventsCreateInput[] => [
 
 const main = async () => {
   try {
+    const users = await Promise.all(
+      getUsers().map((user) => client.user.create({ data: user })),
+    );
     const events = await Promise.all(
       getUSAClimbingEvents().map((event) =>
         client.uSAClimbingEvents.create({
