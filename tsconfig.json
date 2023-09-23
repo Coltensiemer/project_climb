@@ -28,6 +28,6 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs"
-, "src/utils/parseEventData/parseEventDate.test.js", "src/utils/parseEventData/parseEventData.ts", "prisma/seed.js"  ],
+, "src/utils/parseEventData/parseEventDate.test.js", "src/utils/parseEventData/parseEventData.ts", "prisma/seed.js", "src/utils/puppeteer.js"  ],
   "exclude": ["node_modules"]
 }
