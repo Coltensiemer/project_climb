@@ -20,11 +20,11 @@ const getUsers = (): Prisma.UserCreateInput[] => [
 
 const getUSAClimbingEvents = (): Prisma.USAClimbingEventsCreateInput[] => [
   {
-    events:
+    event:
       "2023/04/01 Southeast Divisional Boulder, LeadTR The Overlook Climbing & Fitness/Stone Summit Kennesaw Atlanta GA",
   },
   {
-    events:
+    event:
       "2023/04/01 West Coast Divisional Boulder, LeadTR Mesa Rim North City San Marcos CA",
   },
 ];
