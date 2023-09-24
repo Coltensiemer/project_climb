@@ -1,66 +1,73 @@
-// const { Cluster } = require('puppeteer-cluster');
 import { Cluster } from "puppeteer-cluster";
-import  scrapeEvents  from "./puppeteer.js";
+import scrapeEvents from "./puppeteer.js";
 
 
-type dataFormat = { 
-  compName: string | undefined,
-  compLocation: string | undefined,
-  compDate: string | undefined,
-
-}
+type DataFormat = {
+  compName: string | undefined;
+  compLocation: string | undefined;
+  compDate: string | undefined;
+};
 
 async function clusters() {
-  const eventListAll = await scrapeEvents();
-  const urls : string[] = [];
+  try {
+    const eventListAll = await scrapeEvents();
+    const urls: string[] = [];
 
-   eventListAll.map((event) => {
-    if (event.urlResults !== undefined) {
-      const urlResults: string = event.urlResults;
-      urls.push(urlResults);
-    } else {
-      // Handle the case when urlResults is undefined
-      console.error("urlResults is undefined");
-    }
-  });
-
-  const cluster = await Cluster.launch({
-    concurrency: Cluster.CONCURRENCY_CONTEXT,
-    maxConcurrency: 5,
-    monitor: true,
-    puppeteerOptions: {
-      headless: "new",
-    },
-  });
-
-  cluster.on("taskerror", (err, data) => {
-    console.log(`Error crawling ${data}: ${err.message}`);
-  });
-// Run each URL and gather info
-  await cluster.task(async ({ page, data: url }) => {
-    await page.goto(url);
-    await page.waitForNetworkIdle();
-    let  data : dataFormat = await page.evaluate(() => {
-      const compName = document.getElementById("compName");
-      const compLocation = document.getElementById("compLocation");
-      const compDate = document.getElementById("compDates");
-
-      return (data = {
-        compName: compName?.innerText,
-        compLocation: compLocation?.innerText,
-        compDate: compDate?.innerText,
-      });
+    eventListAll.forEach((event) => {
+      if (event.urlResults !== undefined) {
+        const urlResults: string = event.urlResults;
+        urls.push(urlResults);
+      } else {
+        // Handle the case when urlResults is undefined
+        console.error("urlResults is undefined");
+      }
     });
 
-    console.log("results", data);
-  });
+    const cluster = await Cluster.launch({
+      concurrency: Cluster.CONCURRENCY_CONTEXT,
+      maxConcurrency: 5,
+      monitor: true,
+      puppeteerOptions: {
+        headless: true, 
+      },
+    });
 
-  for (const url of urls) {
-    await cluster.queue(url);
+    cluster.on("taskerror", (err: Error, data: string) => {
+      console.error(`Error crawling ${data}: ${err.message}`);
+    });
+
+    // Run each URL and gather info
+    await cluster.task(async ({ page, data: url }) => {
+      try {
+        await page.goto(url);
+        await page.waitForNetworkIdle();
+        const data: DataFormat = await page.evaluate(() => {
+          const compName = document.getElementById("compName");
+          const compLocation = document.getElementById("compLocation");
+          const compDate = document.getElementById("compDates");
+
+          return {
+            compName: compName?.innerText,
+            compLocation: compLocation?.innerText,
+            compDate: compDate?.innerText,
+          };
+        });
+
+        console.log("results", data);
+      } catch (err) {
+        console.error("Error in page evaluation:", err);
+      }
+    });
+
+    for (const url of urls) {
+      await cluster.queue(url);
+    }
+
+    await cluster.idle();
+    await cluster.close();
+  } catch (err) {
+    console.error("Error in clusters function:", err);
   }
-
-  await cluster.idle();
-  await cluster.close();
 }
 
-clusters();
+clusters().catch((e) => { console.log("error", e)})
