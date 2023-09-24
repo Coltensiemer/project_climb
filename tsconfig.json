@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "commonjs", 
+    "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -18,7 +18,7 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
     }
   },
   "include": [
@@ -30,4 +30,5 @@
     "**/*.mjs"
 , "src/utils/parseEventData/parseEventDate.test.js", "src/utils/parseEventData/parseEventData.ts", "prisma/seed.js", "src/utils/puppeteer.js"  ],
   "exclude": ["node_modules"]
+
 }
