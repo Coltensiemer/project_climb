@@ -1,6 +1,7 @@
 // const puppeteer= require("puppeteer");
 import puppeteer from "puppeteer";
 
+
 //WebScrapping for EventList, to be export into clusters.js to run mutiple clusters
 export default async function scrapeEvents() {
   // Launch the browser and open a new blank page
