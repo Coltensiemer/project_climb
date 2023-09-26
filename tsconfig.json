@@ -19,6 +19,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@prisma/*": ["./prisma/*"],
     }
   },
   "include": [
@@ -28,7 +30,7 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs"
-, "src/utils/parseEventData/parseEventDate.test.js", "src/utils/parseEventData/parseEventData.ts", "prisma/seed.js", "src/utils/puppeteer.ts", "src/utils/clusters.ts"  ],
+, "src/utils/parseEventData/parseEventDate.test.js", "src/utils/parseEventData/parseEventData.ts", "./prisma/seed.ts", "src/utils/puppeteer.ts", "src/utils/clusters.ts"  ],
   "exclude": ["node_modules"]
 
 }

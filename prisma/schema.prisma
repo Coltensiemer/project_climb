@@ -66,13 +66,41 @@ model VerificationToken {
 }
 
 model USAClimbingEvents {
-    id      String            @id @default(cuid())
-    event  String
-    results USAEventResults[]
+    id         String            @id @default(cuid())
+    event      String
+    resultsURL String
+    results    USAEventResults[]
 }
 
 model USAEventResults {
-    id      String            @id @default(cuid())
-    event   USAClimbingEvents @relation(fields: [eventid], references: [id])
-    eventid String
+    id       String            @id @default(cuid())
+    event    USAClimbingEvents @relation(fields: [eventid], references: [id])
+    eventid  String
+    location String
+    date     String
+    climbers ClimberResult[] // Changed relationship name to "climbers" and type to "ClimberResult[]"
+}
+
+model ClimberResult {
+    id        String          @id @default(cuid())
+    climber   Climber         @relation(fields: [climberId], references: [id])
+    climberId String
+    event     USAEventResults @relation(fields: [eventId], references: [id])
+    eventId   String
+    team      String // Added team field to capture the team information
+    rank      Int // Added rank field to capture the climber's rank
+    score     Float // Added score field to capture the climber's score
+}
+
+model Climber {
+    id      String          @id @default(cuid())
+    name    String
+    team    Teams            @relation(fields: [id], references: [id])
+    results ClimberResult[]
+}
+
+model Teams {
+    id       String    @id @default(cuid())
+    team     String    @unique
+    climbers Climber[]
 }
