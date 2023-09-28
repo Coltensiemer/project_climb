@@ -48,13 +48,16 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    id             String    @id @default(cuid())
+    name           String?
+    userName       String?   @unique
+    email          String?   @unique
+    emailVerified  DateTime?
+    image          String?
+    freeAccount    Boolean
+    premiumAccount Boolean
+    accounts       Account[]
+    sessions       Session[]
 }
 
 model VerificationToken {
@@ -63,6 +66,15 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Gym {
+    id      String  @id @default(cuid())
+    gymName String  @unique
+    email   String
+    address String?
+    image   String?
+    events  String //add relation to teams 
 }
 
 model USAClimbingEvents {
@@ -87,20 +99,31 @@ model ClimberResult {
     climberId String
     event     USAEventResults @relation(fields: [eventId], references: [id])
     eventId   String
-    team      String // Added team field to capture the team information
     rank      Int // Added rank field to capture the climber's rank
-    score     Float // Added score field to capture the climber's score
+    points    Float // Added score field to capture the climber's score
 }
 
 model Climber {
-    id      String          @id @default(cuid())
-    name    String
-    team    Teams            @relation(fields: [id], references: [id])
-    results ClimberResult[]
+    id              String          @id @default(cuid())
+    name            String
+    region          String
+    categroy        String?
+    qe_rank_boulder Int?
+    qu_rank_lead    Int?
+    membership      Int?
+    city            String?
+    state           String?
+    team            Teams           @relation(fields: [id], references: [id])
+    results         ClimberResult[]
 }
 
 model Teams {
-    id       String    @id @default(cuid())
-    team     String    @unique
-    climbers Climber[]
+    id        String    @id @default(cuid())
+    team_name String    @unique
+    region    String
+    city      String?
+    state     String?
+    website   String?
+    contact   String?
+    climbers  Climber[]
 }

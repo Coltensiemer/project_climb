@@ -10,12 +10,16 @@ const getUsers = (): Prisma.UserCreateInput[] => [
     email: "test@gmail.com",
     emailVerified: null,
     image: null,
+    freeAccount: true,
+    premiumAccount: false
   },
   {
     name: "Test2",
     email: "test2@gmail.com",
     emailVerified: null,
     image: null,
+    freeAccount: false,
+    premiumAccount: true
   },
 ];
 
@@ -35,21 +39,34 @@ const getUSAClimbingEvents = (): Prisma.USAClimbingEventsCreateInput[] => [
 
 const getTeam = (): Prisma.TeamsCreateInput[] => [
   {
-    team: 'team 1'
+    team_name: 'team 1',
+    region: 'R1',
+    city: 'TestCity1',
+    state: 'TN',
+    website: ''
   },
   { 
-    team: 'team 2'
+    team_name: 'team 2',
+    region: 'R2',
+    city: 'TestCity2',
+    state: 'TN',
   }
 ]
 
 const getClimber = (): Prisma.ClimberCreateInput[] => [
   {
     name: 'climber 1',
+    region: 'R1'
   },
   { 
     name: 'climber 2',
+    region: 'R2'
     }
 ]
+// const climbers = await Promise.all(getClimber().map((climber) => 
+// client.climber.create({
+//   data: climber
+// }))) // Was not working?? Comment out for no erroros 
 
 
 
@@ -70,13 +87,7 @@ const main = async () => {
         {data: teams}
       ))
     )
-    const climbers = await Promise.all(getClimber().map((climber) => 
-        client.climber.create({
-          data: climber
-        })
 
-    )
-    )
   } catch (error) {
     console.log("error with seeding:", error);
   }
