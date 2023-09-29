@@ -11,7 +11,7 @@ const getUsers = (): Prisma.UserCreateInput[] => [
     emailVerified: null,
     image: null,
     freeAccount: true,
-    premiumAccount: false
+    premiumAccount: false,
   },
   {
     name: "Test2",
@@ -19,7 +19,7 @@ const getUsers = (): Prisma.UserCreateInput[] => [
     emailVerified: null,
     image: null,
     freeAccount: false,
-    premiumAccount: true
+    premiumAccount: true,
   },
 ];
 
@@ -27,48 +27,42 @@ const getUSAClimbingEvents = (): Prisma.USAClimbingEventsCreateInput[] => [
   {
     event:
       "2023/08/04 Elite National LeadTR, Speed inSPIRE Rock Gym Cypress TX",
-      resultsURL: "Test URL 1",
-      
+    resultsURL: "Test URL 1",
   },
   {
     event:
       "2023/04/01 West Coast Divisional Boulder, LeadTR Mesa Rim North City San Marcos CA",
-      resultsURL: "Test URL 2"
+    resultsURL: "Test URL 2",
   },
 ];
 
 const getTeam = (): Prisma.TeamsCreateInput[] => [
   {
-    team_name: 'team 1',
-    region: 'R1',
-    city: 'TestCity1',
-    state: 'TN',
-    website: ''
+    team_name: "team 1",
+    region: "R1",
+    city: "TestCity1",
+    state: "TN",
+    website: "",
   },
-  { 
-    team_name: 'team 2',
-    region: 'R2',
-    city: 'TestCity2',
-    state: 'TN',
-  }
-]
+  {
+    team_name: "team 2",
+    region: "R2",
+    city: "TestCity2",
+    state: "TN",
+  },
+];
 
 const getClimber = (): Prisma.ClimberCreateInput[] => [
   {
-    name: 'climber 1',
-    region: 'R1'
+    name: "climber 1",
+    region: "R1",
   },
-  { 
-    name: 'climber 2',
-    region: 'R2'
-    }
-]
-// const climbers = await Promise.all(getClimber().map((climber) => 
-// client.climber.create({
-//   data: climber
-// }))) // Was not working?? Comment out for no erroros 
-
-
+  {
+    name: "climber 2",
+    region: "R2",
+  },
+];
+// Was not working?? Comment out for no erroros
 
 const main = async () => {
   try {
@@ -83,11 +77,15 @@ const main = async () => {
       ),
     );
     const teams = await Promise.all(
-      getTeam().map((teams) => client.teams.create( 
-        {data: teams}
-      ))
-    )
-
+      getTeam().map((teams) => client.teams.create({ data: teams })),
+    );
+    const climbers = await Promise.all(
+      getClimber().map((climber) =>
+        client.climber.create({
+          data: climber,
+        }),
+      ),
+    );
   } catch (error) {
     console.log("error with seeding:", error);
   }

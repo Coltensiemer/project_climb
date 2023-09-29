@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "checkJs": true,
@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "commonjs",
+    "module": "ES6",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -20,7 +20,7 @@
     "paths": {
       "~/*": ["./src/*"],
       "@utils/*": ["./src/utils/*"],
-      "@prisma/*": ["./prisma/*"],
+      "@prisma/*": ["./prisma/*"]
     }
   },
   "include": [
@@ -29,8 +29,12 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
-    "**/*.mjs"
-, "src/utils/parseEventData/parseEventDate.test.js", "src/utils/parseEventData/parseEventData.ts", "./prisma/seed.ts", "src/utils/puppeteer.ts", "src/utils/clusters.ts"  ],
+    "**/*.mjs",
+    "src/utils/parseEventData/parseEventDate.test.js","src/utils/clusters.ts",
+    "src/utils/parseEventData/parseEventData.ts",
+    "./prisma/seed.ts",
+    "src/utils/puppeteer.js",
+    "src/utils/clusters.ts"
+  ],
   "exclude": ["node_modules"]
-
 }

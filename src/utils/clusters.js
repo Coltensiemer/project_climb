@@ -1,21 +1,19 @@
 import { Cluster } from "puppeteer-cluster";
 import scrapeEvents from "./puppeteer.js";
+// const scrapeEvents = require('./puppeteer.js')
+// const Cluster = require('puppeteer-cluster')
 
 
-type DataFormat = {
-  compName: string | undefined;
-  compLocation: string | undefined;
-  compDate: string | undefined;
-};
+
 
 async function clusters() {
   try {
     const eventListAll = await scrapeEvents();
-    const urls: string[] = [];
+    const urls = [];
 
     eventListAll.forEach((event) => {
       if (event.urlResults !== undefined) {
-        const urlResults: string = event.urlResults;
+        const urlResults = event.urlResults;
         urls.push(urlResults);
       } else {
         // Handle the case when urlResults is undefined
@@ -32,7 +30,7 @@ async function clusters() {
       },
     });
 
-    cluster.on("taskerror", (err: Error, data: string) => {
+    cluster.on("taskerror", (err, data) => {
       console.error(`Error crawling ${data}: ${err.message}`);
     });
 
@@ -41,7 +39,7 @@ async function clusters() {
       try {
         await page.goto(url);
         await page.waitForNetworkIdle();
-        const data: DataFormat = await page.evaluate(() => {
+        const data = await page.evaluate(() => {
           const compName = document.getElementById("compName");
           const compLocation = document.getElementById("compLocation");
           const compDate = document.getElementById("compDates");
