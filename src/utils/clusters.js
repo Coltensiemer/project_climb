@@ -1,7 +1,6 @@
 import { Cluster } from "puppeteer-cluster";
 import scrapeEvents from "./puppeteer.js";
-// const scrapeEvents = require('./puppeteer.js')
-// const Cluster = require('puppeteer-cluster')
+
 
 
 
