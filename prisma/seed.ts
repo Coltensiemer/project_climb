@@ -56,10 +56,16 @@ const getClimber = (): Prisma.ClimberCreateInput[] => [
   {
     name: "climber 1",
     region: "R1",
+    team: { 
+      connect: { id: 1}
+    }
   },
   {
     name: "climber 2",
     region: "R2",
+    team: { 
+      connect: {id: 2}
+    }
   },
 ];
 // Was not working?? Comment out for no erroros
