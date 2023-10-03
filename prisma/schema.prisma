@@ -22,33 +22,35 @@ model Example {
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
+    id                Int      @id @default(autoincrement())
+    userId            Int
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+    refresh_token     String?  @db.Text
+    access_token      String?  @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? @db.Text
+    id_token          String?  @db.Text
     session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
 }
 
 model Session {
-    id           String   @id @default(cuid())
+    id           Int      @id @default(autoincrement())
     sessionToken String   @unique
-    userId       String
+    userId       Int
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id             String    @id @default(cuid())
+    id             Int       @id @default(autoincrement())
     name           String?
     userName       String?   @unique
     email          String?   @unique
@@ -69,43 +71,48 @@ model VerificationToken {
 }
 
 model Gym {
-    id      String  @id @default(cuid())
-    gymName String  @unique
-    email   String
-    address String?
-    image   String?
-    events  String //add relation to teams 
+    id        Int      @id @default(autoincrement())
+    gymName   String   @unique
+    email     String
+    address   String?
+    image     String?
+    events    String //add relation to teams 
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
 model USAClimbingEvents {
-    id         String            @id @default(cuid())
+    id         Int               @id @default(autoincrement())
     event      String
-    resultsURL String
+    resultsURL String           @unique
     results    USAEventResults[]
+    createdAt  DateTime          @default(now())
+    updatedAt  DateTime          @updatedAt
 }
 
 model USAEventResults {
-    id       String            @id @default(cuid())
-    event    USAClimbingEvents @relation(fields: [eventid], references: [id])
-    eventid  String
+    id       Int                @id @default(autoincrement())
+    event    USAClimbingEvents? @relation(fields: [eventid], references: [id])
+    eventid  Int
     location String
     date     String
-    climbers ClimberResult[] // Changed relationship name to "climbers" and type to "ClimberResult[]"
+    climbers ClimberResult[]
+
 }
 
 model ClimberResult {
-    id        String          @id @default(cuid())
+    id        Int             @id @default(autoincrement())
     climber   Climber         @relation(fields: [climberId], references: [id])
-    climberId String
+    climberId Int
     event     USAEventResults @relation(fields: [eventId], references: [id])
-    eventId   String
-    rank      Int // Added rank field to capture the climber's rank
-    points    Float // Added score field to capture the climber's score
+    eventId   Int
+    rank      Int
+    points    Float
 }
 
 model Climber {
-    id              String          @id @default(cuid())
-    name            String
+    id              Int             @id @default(autoincrement())
+    name            String          
     region          String
     categroy        String?
     qe_rank_boulder Int?
@@ -113,12 +120,15 @@ model Climber {
     membership      Int?
     city            String?
     state           String?
-    team            Teams           @relation(fields: [id], references: [id])
+    team            Teams           @relation(fields: [teamId], references: [id])
+    teamId          Int
     results         ClimberResult[]
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
 model Teams {
-    id        String    @id @default(cuid())
+    id        Int       @id @default(autoincrement())
     team_name String    @unique
     region    String
     city      String?
@@ -126,4 +136,6 @@ model Teams {
     website   String?
     contact   String?
     climbers  Climber[]
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

@@ -30,11 +30,11 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "src/utils/parseEventData/parseEventDate.test.js","src/utils/clusters.ts",
+    "src/utils/parseEventData/parseEventDate.test.js","src/utils/clusters.js",
     "src/utils/parseEventData/parseEventData.ts",
     "./prisma/seed.ts",
     "src/utils/puppeteer.js",
-    "src/utils/clusters.ts"
+    "src/utils/clusters.js"
   ],
   "exclude": ["node_modules"]
 }

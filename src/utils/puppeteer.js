@@ -3,8 +3,8 @@ import puppeteer from "puppeteer";
 import { createClient } from "@supabase/supabase-js";
 import 'dotenv/config'
 
-const supabaseUrl = "postgresql://postgres:cz5uhoH9maY0ARI6@db.zaedmhdsfypksviqybsm.supabase.co:5432/postgres"
-const supabasePassword = 'cz5uhoH9maY0ARI6'
+const supabaseUrl = "https://zaedmhdsfypksviqybsm.supabase.co"
+const supabasePassword = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphZWRtaGRzZnlwa3N2aXF5YnNtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5NDQ3ODkwMSwiZXhwIjoyMDEwMDU0OTAxfQ.WNAPY-MzL5mwV70cMLARzlpzmDAdvPBJsiaBY7bNVLM'
 const supabase = createClient(supabaseUrl, supabasePassword)
 
 //WebScrapping for EventList, to be export into clusters.js to run mutiple clusters
@@ -21,12 +21,34 @@ export const scrapeEvents = async () => {
 
   const eventListAll = await page.evaluate(() =>
     Array.from(document.querySelectorAll(".eventList li"), (e) => ({
-      title: e.querySelector("a")?.innerText,
-      urlResults: e.querySelector("a")?.href,
+      event: e.querySelector("a")?.innerText,
+      resultsURL: e.querySelector("a")?.href,
     })),
   );
 
   await browser.close();
-
-  return eventListAll;
+return eventListAll
 }
+
+
+const testData = { 
+    event: '2023/04/30 R81 QE Speed Sportrock Performance Institute Alexandria VA',
+    resultsURL: 'https://usacresults.org/scores?eid=1353'
+}
+
+//write code to put Scrape Event in supabase online. 
+
+// const { data: todos, error } = await supabase.from('todos').select('*')
+
+async function upsertEvents() { 
+
+  const {data, error} = await supabase.from('USAClimbingEvents').upsert(testData)
+
+  if (error) {
+    console.error('Error pushing data to Supabase:', error, testData);
+  } else {
+    console.log('Data pushed to Supabase successfully:', data);
+  }
+}
+
+upsertEvents()
