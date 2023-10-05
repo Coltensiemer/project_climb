@@ -1,18 +1,15 @@
 import { Cluster } from "puppeteer-cluster";
-import scrapeEvents from "./puppeteer.js";
-
-
-
-
+import { scrapeEvents } from "./puppeteer.js";
 
 async function clusters() {
+  //@ts-ignore
+  const urls = [];
   try {
     const eventListAll = await scrapeEvents();
-    const urls = [];
 
     eventListAll.forEach((event) => {
-      if (event.urlResults !== undefined) {
-        const urlResults = event.urlResults;
+      if (event.resultsURL !== undefined) {
+        const urlResults = event.resultsURL;
         urls.push(urlResults);
       } else {
         // Handle the case when urlResults is undefined
@@ -25,7 +22,7 @@ async function clusters() {
       maxConcurrency: 5,
       monitor: true,
       puppeteerOptions: {
-        headless: true, 
+        headless: true,
       },
     });
 
@@ -56,6 +53,7 @@ async function clusters() {
       }
     });
 
+    //@ts-ignore
     for (const url of urls) {
       await cluster.queue(url);
     }
@@ -67,4 +65,6 @@ async function clusters() {
   }
 }
 
-clusters().catch((e) => { console.log("error", e)})
+clusters().catch((e) => {
+  console.log("error", e);
+});

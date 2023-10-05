@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import 'dotenv/config'
 
 const supabaseUrl = "https://zaedmhdsfypksviqybsm.supabase.co"
+const localUrl ='postgresql://postgres:postgres@localhost:54322/postgres'
 const supabasePassword = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphZWRtaGRzZnlwa3N2aXF5YnNtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5NDQ3ODkwMSwiZXhwIjoyMDEwMDU0OTAxfQ.WNAPY-MzL5mwV70cMLARzlpzmDAdvPBJsiaBY7bNVLM'
 const supabase = createClient(supabaseUrl, supabasePassword)
 
@@ -36,18 +37,18 @@ const testData = {
     resultsURL: 'https://usacresults.org/scores?eid=1353'
 }
 
-//write code to put Scrape Event in supabase online. 
 
-// const { data: todos, error } = await supabase.from('todos').select('*')
 
 async function upsertEvents() { 
 
-  const {data, error} = await supabase.from('USAClimbingEvents').upsert(testData)
+  const events = await scrapeEvents()
+
+  const { data, error } = await supabase.from('USAClimbingEvents').upsert(events, { onConflict: 'resultsURL', ignoreDuplicates: true})
 
   if (error) {
-    console.error('Error pushing data to Supabase:', error, testData);
+    console.error('Error pushing data to Supabase:', error, events);
   } else {
-    console.log('Data pushed to Supabase successfully:', data);
+    console.log('Data pushed to Supabase successfully:');
   }
 }
 
