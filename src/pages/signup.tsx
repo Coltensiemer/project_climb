@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import Link from "next/link";
 import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
 
+
+
+
+
 export default function SignUp() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+
 
   const handleChange = (e: string) => {};
 
@@ -33,7 +32,7 @@ export default function SignUp() {
                 type="text"
                 id="username"
                 name="username"
-                value={formData.username}
+                value={undefined}
                 onChange={undefined}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
@@ -49,7 +48,7 @@ export default function SignUp() {
                 type="email"
                 id="email"
                 name="email"
-                value={formData.email}
+                value={undefined}
                 onChange={undefined}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
@@ -65,7 +64,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 name="password"
-                value={formData.password}
+                value={undefined}
                 onChange={undefined}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
@@ -81,7 +80,7 @@ export default function SignUp() {
                 type="confirmPassword"
                 id="confirmPassword"
                 name="confirmPassword"
-                value={formData.confirmPassword}
+                value={undefined}
                 onChange={undefined}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
