@@ -1,8 +1,12 @@
-const { createClient } = require('@supabase/supabase-js')
+import { createClient } from '@supabase/supabase-js'
+import 'dotenv/config'
 
 
- export const supabase = createClient({
-  apiKey: 'cz5uhoH9maY0ARI6',
-  url: process.env.DATABASE_URL
-})
+const DATABASE_SUPABASE_URL= process.env.DATABASE_SUPABASE_URL
+const  DATABASE_SUPABASE_ANON_KEY = process.env.DATABASE_SUPABASE_ANON_KEY
+const DATABASE_SUPABASE_LOCAL_URL = process.env.DATABASE_SUPABASE_LOCAL_URL
 
+//@ts-expect-error
+export const supabase = createClient(DATABASE_SUPABASE_URL, DATABASE_SUPABASE_ANON_KEY )
+//@ts-expect-error
+export const supabaseLocal = createClient(DATABASE_SUPABASE_LOCAL_URL, DATABASE_SUPABASE_ANON_KEY)

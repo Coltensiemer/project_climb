@@ -2,11 +2,12 @@
 import puppeteer from "puppeteer";
 import { createClient } from "@supabase/supabase-js";
 import 'dotenv/config'
+import {supabase} from "supabaseClient"
 
 const supabaseUrl = "https://zaedmhdsfypksviqybsm.supabase.co"
 const localUrl ='postgresql://postgres:postgres@localhost:54322/postgres'
 const supabasePassword = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphZWRtaGRzZnlwa3N2aXF5YnNtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5NDQ3ODkwMSwiZXhwIjoyMDEwMDU0OTAxfQ.WNAPY-MzL5mwV70cMLARzlpzmDAdvPBJsiaBY7bNVLM'
-const supabase = createClient(supabaseUrl, supabasePassword)
+
 
 //WebScrapping for EventList, to be export into clusters.js to run mutiple clusters
 export const scrapeEvents = async () => {

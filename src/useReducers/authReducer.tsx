@@ -1,23 +1,23 @@
 
 
-export enum reduceAction { 
+export enum reducerAction { 
 	signUp,
 	signIn,
 	signOut
 }
 
-type signUp { 
-	type: reduceAction.signUp,
+type signUp = { 
+	type: reducerAction.signUp,
 	payload: any
 }
 
-type signIn { 
-	type: reduceAction.signIn,
+type signIn = { 
+	type: reducerAction.signIn,
 	payload: any
 }
 
-type signOut { 
-	type: reduceAction.signOut,
+type signOut = { 
+	type: reducerAction.signOut,
 	payload: any
 }
 
@@ -28,21 +28,22 @@ interface authState {
 	password: string
 }
 
+
 export const authReducer = (state: authState, action: configAction) => { 
 	switch(action.type) { 
-		case reduceAction.signUp: 
+		case reducerAction.signUp: 
 		return { 
 			...state,
 			email: action.payload,
 			password: action.payload
 		}
-		case reduceAction.signIn:
+		case reducerAction.signIn:
 			return { 
 				...state,
 				email: action.payload,
 				password: action.payload
 			}
-		case reduceAction.signOut: 
+		case reducerAction.signOut: 
 		return { 
 			...state,
 			email: null,
