@@ -30,9 +30,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "src/utils/clusters.ts",
     "./prisma/seed.ts",
    
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/utils/clusters.js","src/utils/puppeteer.js", ]
 }

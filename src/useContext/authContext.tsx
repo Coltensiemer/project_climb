@@ -2,24 +2,23 @@ import { createContext, useContext, useReducer } from 'react';
 import { authReducer, reducerAction } from '~/useReducers/authReducer';
 import { createClient } from '@supabase/supabase-js';
 import { User, Session } from '@supabase/supabase-js'
-import {supabase} from "supabaseClient"
+import {supabaseLocal} from "supabaseClient"
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({});
 
 const INITAL_STATE = { 
 	email: null,
 	password: null
   }
-
-export const AuthProvider = ({children}: any) => {
+//@ts-ignore
+export const AuthProvider = ({children}:any) => {
 
 	const [state, dispatch] = useReducer(authReducer, INITAL_STATE)
 
 	const signUp = async (email: string, password: string) => {
 		try {
-		  // Implement the Supabase sign-up logic here
-		  // Replace with your actual Supabase authentication code
-		  const { data, error } = await supabase.auth.signUp({
+			//SET UP FOR LOCAL TEST. NEED TO CHEK CLIENT URL/Password
+		  const { data, error } = await supabaseLocal.auth.signUp({
 			email,
 			password,
 		  });
@@ -38,7 +37,7 @@ export const AuthProvider = ({children}: any) => {
 
 
   return (
-    <AuthContext.Provider value={null}>
+    <AuthContext.Provider value={{state, signUp}}>
       {children}
     </AuthContext.Provider>
   )

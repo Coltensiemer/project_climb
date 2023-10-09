@@ -10,9 +10,9 @@ import { Button } from "@/components/ui/button";
 export default function SignUp() {
 
 
-  const handleChange = (e: string) => {};
+  const handleChange = (e: string) => {undefined};
 
-  const handleSubmit = (e: string) => {};
+  const handleSubmit = (e: string) => {undefined};
 
   return (
     <>

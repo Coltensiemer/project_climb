@@ -9,9 +9,9 @@ export default function SignUp() {
     password: "",
   });
 
-  const handleChange = (e: string) => {};
+  const handleChange = (e: string) => {undefined};
 
-  const handleSubmit = (e: string) => {};
+  const handleSubmit = (e: string) => {undefined};
 
   return (
     <>
@@ -60,7 +60,7 @@ export default function SignUp() {
               Login
             </Button>
             <div className="mt-5">
-              <p>Don't Have an account?</p>
+              <p>Do not Have an account?</p>
               <Button variant={"outline"}>
                 <Link href='signup'>Sign Up</Link>
               </Button>
