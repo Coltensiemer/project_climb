@@ -33,5 +33,5 @@
     "./prisma/seed.ts",
    
   ],
-  "exclude": ["node_modules", "src/utils/clusters.js","src/utils/puppeteer.js", ]
+  "exclude": ["node_modules", ]
 }
