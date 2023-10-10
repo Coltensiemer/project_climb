@@ -1,34 +1,40 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useReducer } from 'react';
 import { authReducer, reducerAction } from '~/useReducers/authReducer';
-import { createClient } from '@supabase/supabase-js';
 import { User, Session } from '@supabase/supabase-js'
-import {supabaseLocal} from "supabaseClient"
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
 
-const AuthContext = createContext({});
+export const AuthContext = createContext({});
 
-const INITAL_STATE = { 
+export const AuthProvider = ({children}:any) => {
+	const router = useRouter()
+
+const supabase = createClientComponentClient()
+
+const INITAL_STATE = {
 	email: null,
 	password: null
   }
-//@ts-ignore
-export const AuthProvider = ({children}:any) => {
 
-	const [state, dispatch] = useReducer(authReducer, INITAL_STATE)
+const [state, dispatch] = useReducer(authReducer, INITAL_STATE)
 
-	const signUp = async (email: string, password: string) => {
+const signUp = async (email: string, password: string) => {
 		try {
 			//SET UP FOR LOCAL TEST. NEED TO CHEK CLIENT URL/Password
-		  const { data, error } = await supabaseLocal.auth.signUp({
+		  const { data, error } = await supabase.auth.signUp({
 			email,
 			password,
+			options: { 
+				emailRedirectTo: `${location.origin}/auth/callback`
+			}
 		  });
-	
+		  router.refresh()	
+
 		  if (error) {
 			throw error;
 		  }
 	
 		  // Dispatch the SIGN_UP action with the user data
-		  dispatch({ type: reducerAction.signUp, payload: { data } });
 		} catch (error) {
 		  console.log("Error with Sign Up", error)
 		
@@ -37,7 +43,7 @@ export const AuthProvider = ({children}:any) => {
 
 
   return (
-    <AuthContext.Provider value={{state, signUp}}>
+    <AuthContext.Provider value={{...state, signUp}}>
       {children}
     </AuthContext.Provider>
   )

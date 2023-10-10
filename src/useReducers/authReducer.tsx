@@ -33,7 +33,7 @@ export const authReducer = (state: authState, action: configAction) => {
 	switch(action.type) { 
 		case reducerAction.signUp: 
 		return { 
-			...state,
+			...state, 
 			email: action.payload,
 			password: action.payload
 		}

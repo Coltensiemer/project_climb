@@ -1,7 +1,9 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useContext } from "react";
 import Link from "next/link";
 import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
+import { AuthContext } from "~/useContext/authContext";
+
 
 
 
@@ -10,7 +12,22 @@ import { Button } from "@/components/ui/button";
 export default function SignUp() {
 
 
-  const handleChange = (e: string) => {undefined};
+const auth = useContext(AuthContext)
+
+const [formData, setFormData] = useState({
+  email: "",
+  password: "",
+  confirmPassword: "",
+});
+
+// const handleChange = (e: string) => {
+//   const { name, value } = e
+//   setFormData((prevData) => ({
+//     ...prevData,
+//     [name]: value,
+//   }));
+// };
+
 
   const handleSubmit = (e: string) => {undefined};
 
@@ -23,22 +40,6 @@ export default function SignUp() {
           <form onSubmit={undefined}>
             <div className="mb-4">
               <label
-                htmlFor="username"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Username
-              </label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={undefined}
-                onChange={undefined}
-                className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
-              />
-            </div>
-            <div className="mb-4">
-              <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
@@ -48,8 +49,13 @@ export default function SignUp() {
                 type="email"
                 id="email"
                 name="email"
-                value={undefined}
-                onChange={undefined}
+                value={formData.email}
+                onChange={e => {
+                  setFormData({
+                    ...formData,
+                    email: e.target.value
+                  });
+                }}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
             </div>
@@ -64,8 +70,13 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 name="password"
-                value={undefined}
-                onChange={undefined}
+                value={formData.password}
+                onChange={e => {
+                  setFormData({
+                    ...formData,
+                    password: e.target.value
+                  });
+                }}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
             </div>
@@ -103,3 +114,22 @@ export default function SignUp() {
     </>
   );
 }
+
+
+
+{/* <div className="mb-4">
+<label
+  htmlFor="username"
+  className="block text-sm font-medium text-gray-700"
+>
+  Username
+</label>
+<input
+  type="text"
+  id="username"
+  name="username"
+  value={undefined}
+  onChange={undefined}
+  className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
+/>
+</div> */}

@@ -1,5 +1,7 @@
-import { type Session } from "next-auth";
+
 import { type AppType } from "next/app";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Session } from "@supabase/auth-helpers-nextjs";
 import { AuthProvider } from "~/useContext/authContext";
 
 import { api } from "~/utils/api";
@@ -11,11 +13,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-
+      <AuthProvider>
       <Component {...pageProps} />
-
-
+      </AuthProvider>      
   );
 };
 
-export default api.withTRPC(MyApp);
+export default MyApp;
