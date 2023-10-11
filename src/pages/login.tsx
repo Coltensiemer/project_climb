@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
+import { AuthContext } from "~/useContext/authContext";
 
 export default function SignUp() {
+  const auth = useContext(AuthContext)
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const handleChange = (e: string) => {undefined};
 
-  const handleSubmit = (e: string) => {undefined};
+
+  const handleSubmit = async () => {
+    const {email, password} = formData
+
+    if (!email || !password) return console.log("Need Email or Password input")
+    
+    if (auth) {await auth.login(email, password); }
+    
+  };
 
   return (
     <>
@@ -19,7 +29,7 @@ export default function SignUp() {
       <div className="mt-10 flex justify-center">
         <div className="w-full max-w-md">
           <h1 className="mb-6 text-2xl font-semibold">Login</h1>
-          <form onSubmit={undefined}>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -32,7 +42,9 @@ export default function SignUp() {
                 id="email"
                 name="email"
                 value={formData.email}
-                onChange={undefined}
+                onChange={(e) => { 
+                  setFormData({...formData, email: e.target.value})
+                }} 
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
             </div>
@@ -48,7 +60,9 @@ export default function SignUp() {
                 id="password"
                 name="password"
                 value={formData.password}
-                onChange={undefined}
+                onChange={(e) => { 
+                  setFormData({...formData, password: e.target.value})
+                }} 
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
             </div>

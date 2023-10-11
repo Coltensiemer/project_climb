@@ -5,6 +5,7 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 import Header from "~/components/Header";
 import HeroLanding from "~/components/HeroLanding";
+import EventList from "~/components/EventList";
 
 export default function Home() {
   
@@ -16,6 +17,7 @@ export default function Home() {
       <div>
         <p className="bg-red-500">Hi</p>
         </div>
+        <EventList /> 
     </>
   );
 }

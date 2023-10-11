@@ -5,31 +5,23 @@ import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
 
 
-
-
-
-
 export default function SignUp() {
+  const auth = useContext(AuthContext);
 
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-const auth = useContext(AuthContext)
+  const handleSubmit = async () => {
 
-const [formData, setFormData] = useState({
-  email: "",
-  password: "",
-  confirmPassword: "",
-});
-
-// const handleChange = (e: string) => {
-//   const { name, value } = e
-//   setFormData((prevData) => ({
-//     ...prevData,
-//     [name]: value,
-//   }));
-// };
-
-
-  const handleSubmit = (e: string) => {undefined};
+    console.log('data', formData)
+    const { email, password, confirmPassword } = formData;
+    if (password != confirmPassword)
+      return console.log("Password does not match");
+    if (auth) {  await auth.signUp(email, password)};
+  } 
 
   return (
     <>
@@ -37,7 +29,7 @@ const [formData, setFormData] = useState({
       <div className="mt-10 flex justify-center">
         <div className="w-full max-w-md">
           <h1 className="mb-6 text-2xl font-semibold">Sign Up</h1>
-          <form onSubmit={undefined}>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -50,10 +42,10 @@ const [formData, setFormData] = useState({
                 id="email"
                 name="email"
                 value={formData.email}
-                onChange={e => {
+                onChange={(e) => {
                   setFormData({
                     ...formData,
-                    email: e.target.value
+                    email: e.target.value,
                   });
                 }}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
@@ -71,10 +63,10 @@ const [formData, setFormData] = useState({
                 id="password"
                 name="password"
                 value={formData.password}
-                onChange={e => {
+                onChange={(e) => {
                   setFormData({
                     ...formData,
-                    password: e.target.value
+                    password: e.target.value,
                   });
                 }}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
@@ -85,14 +77,19 @@ const [formData, setFormData] = useState({
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
-               Confirm Password
+                Confirm Password
               </label>
               <input
-                type="confirmPassword"
+                type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                value={undefined}
-                onChange={undefined}
+                value={formData.confirmPassword}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    confirmPassword: e.target.value,
+                  });
+                }}
                 className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
               />
             </div>
@@ -102,22 +99,23 @@ const [formData, setFormData] = useState({
             >
               Sign Up
             </Button>
-            <div className="mt-5">
-              <p>Already have an account?</p>
-              <Button variant={"outline"}>
-                <Link href='./login'>Login</Link>
-              </Button>
-            </div>
           </form>
+          <div className="mt-5">
+            <p>Already have an account?</p>
+            <Button variant={"outline"}>
+              <Link href="./login">Login</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </>
   );
-}
+} 
 
 
 
-{/* <div className="mb-4">
+
+  /* <div className="mb-4">
 <label
   htmlFor="username"
   className="block text-sm font-medium text-gray-700"
@@ -132,4 +130,4 @@ const [formData, setFormData] = useState({
   onChange={undefined}
   className="mt-1 w-full rounded-md border p-2 focus:border-blue-500 focus:outline-none"
 />
-</div> */}
+</div> */

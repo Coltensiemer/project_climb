@@ -7,10 +7,11 @@ import 'dotenv/config'
 
 
 const supabaseUrl = "https://zaedmhdsfypksviqybsm.supabase.co"
+const DATABASE_URL='postgresql://postgres:cz5uhoH9maY0ARI6@db.zaedmhdsfypksviqybsm.supabase.co:5432/postgres' 
 const localUrl ='postgresql://postgres:postgres@localhost:54322/postgres'
 const supabasePassword = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphZWRtaGRzZnlwa3N2aXF5YnNtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5NDQ3ODkwMSwiZXhwIjoyMDEwMDU0OTAxfQ.WNAPY-MzL5mwV70cMLARzlpzmDAdvPBJsiaBY7bNVLM'
 
-const supabase = createClient( localUrl, supabasePassword)
+const supabase = createClient( DATABASE_URL, supabasePassword)
 
 //WebScrapping for EventList, to be export into clusters.js to run mutiple clusters
 export const scrapeEvents = async () => {
@@ -33,12 +34,6 @@ export const scrapeEvents = async () => {
 
   await browser.close();
 return eventListAll
-}
-
-
-const testData = { 
-    event: '2023/04/30 R81 QE Speed Sportrock Performance Institute Alexandria VA',
-    resultsURL: 'https://usacresults.org/scores?eid=1353'
 }
 
 

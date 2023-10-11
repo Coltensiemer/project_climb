@@ -68,7 +68,7 @@ const getClimber = (): Prisma.ClimberCreateInput[] => [
     }
   },
 ];
-// Was not working?? Comment out for no erroros
+
 
 const main = async () => {
   try {
