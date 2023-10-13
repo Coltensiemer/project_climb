@@ -5,17 +5,18 @@ import Link from "next/link";
 import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
+import { useRouter } from "next/router";
 
 
-export default function SignUp() {
+export default function resetpassword() {
   const auth = useContext(AuthContext);
-
+  const router = useRouter()
   const [formData, setFormData] = useState({
   email: ""
   });
 
-  const handleSubmit = async() => { 
-    
+  const handleSubmit = async(e:any) => { 
+    e.preventDefault()
 	const {email} = formData
     try {
 		if (auth) await auth.passwordReset(email)
@@ -31,7 +32,7 @@ export default function SignUp() {
       <Header />
       <div className="mt-10 flex justify-center">
         <div className="w-full max-w-md">
-          <h1 className="mb-6 text-2xl font-semibold">UpDate Password</h1>
+          <h1 className="mb-6 text-2xl font-semibold">Send pasword reset</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
          

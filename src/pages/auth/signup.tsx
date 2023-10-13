@@ -14,15 +14,14 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e:any) => {
+    e.preventDefault()
 
-    console.log('data', formData)
     const { email, password, confirmPassword } = formData;
     if (password != confirmPassword)
       return console.log("Password does not match");
     if (auth) {  await auth.signUp(email, password)};
   } 
-
   return (
     <>
       <Header />
@@ -103,7 +102,10 @@ export default function SignUp() {
           <div className="mt-5">
             <p>Already have an account?</p>
             <Button variant={"outline"}>
-              <Link href="./login">Login</Link>
+              <Link href="/auth/login">Login</Link>
+            </Button>
+            <Button>
+                <Link href="/auth/resetpassword">Reset Password</Link>
             </Button>
           </div>
         </div>

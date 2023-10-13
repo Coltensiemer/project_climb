@@ -4,7 +4,7 @@ import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
 
-export default function SignUp() {
+export default function Login() {
   const auth = useContext(AuthContext)
 
   const [formData, setFormData] = useState({
@@ -14,11 +14,12 @@ export default function SignUp() {
 
 
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e:any) => {
+    e.preventDefault();
     const {email, password} = formData
 
     if (!email || !password) return console.log("Need Email or Password input")
-    
+    console.log('attempt ot login')
     if (auth) {await auth.login(email, password); }
     
   };
@@ -77,6 +78,9 @@ export default function SignUp() {
               <p>Do not Have an account?</p>
               <Button variant={"outline"}>
                 <Link href='signup'>Sign Up</Link>
+              </Button>
+              <Button>
+                <Link href='resetpassword'>Reset Password</Link>
               </Button>
             </div>
           </form>

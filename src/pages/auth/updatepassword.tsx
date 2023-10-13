@@ -85,7 +85,7 @@ export default function SignUp() {
           <div className="mt-5">
             <p>Already have an account?</p>
             <Button variant={"outline"}>
-              <Link href="./login">Login</Link>
+              <Link href="./auth/login">Login</Link>
             </Button>
           </div>
         </div>
