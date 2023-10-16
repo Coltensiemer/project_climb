@@ -15,8 +15,6 @@ interface AuthContextType {
   signOut: () => Promise<void>
   updatePassword: (password: string) => Promise<void>;
   passwordReset: (email: string) => Promise<void>;
-
-  // Add other properties or functions as needed
 }
 const INITAL_STATE = {
   email: null,
@@ -107,7 +105,12 @@ export const AuthProvider: FC <AuthProviderProps> = ({ children }: any) => {
 
   // Get User's 
 useEffect(() =>  {
+
+
+  
+
 	const getUser = async () => { 
+
 		const {data: {user}} = await supabaseClient.auth.getUser()
 		setUser(user)
 		console.log(user)
