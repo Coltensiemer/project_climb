@@ -4,17 +4,22 @@ import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
 
+interface formType { 
+  email: string, 
+  password: string
+}
+
 export default function Login() {
   const auth = useContext(AuthContext)
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<formType>({
     email: "",
     password: "",
   });
 
 
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const {email, password} = formData
 

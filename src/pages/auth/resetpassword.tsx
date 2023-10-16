@@ -1,6 +1,6 @@
 
 
-  import React, { useState, useReducer, useContext } from "react";
+  import React, { useState, useContext } from "react";
 import Link from "next/link";
 import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
@@ -8,9 +8,8 @@ import { AuthContext } from "~/useContext/authContext";
 import { useRouter } from "next/router";
 
 
-export default function resetpassword() {
+export default function Resetpassword() {
   const auth = useContext(AuthContext);
-  const router = useRouter()
   const [formData, setFormData] = useState({
   email: ""
   });

@@ -1,14 +1,19 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Link from "next/link";
 import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
 
+interface formType  { 
+  email: string,
+  password: string,
+  confirmPassword: string,
+}
 
 export default function SignUp() {
   const auth = useContext(AuthContext);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<formType>({
     email: "",
     password: "",
     confirmPassword: "",

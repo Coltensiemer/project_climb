@@ -1,9 +1,15 @@
-import Link from "next/link";
+
 import React, { useEffect, useState } from "react";
 import { supabaseLocal } from "supabaseClient";
 
+interface Events { 
+  id: number,
+  event: string,
+  resultsURL: string
+}
+
 export default function EventList() {
-  const [events, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<Events[]>([]);
 
   const handleEventList = async () => {
     try {
@@ -28,7 +34,7 @@ export default function EventList() {
     <>
       <p>Hello World</p>
       <ul>
-        {events.map((event: any, index: number) => (
+        {events.map((event: Events, index: number) => (
           <li key={index}>{event.resultsURL}</li>
         ))}
       </ul>

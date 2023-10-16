@@ -1,12 +1,15 @@
-import { createContext, useReducer, useState, useEffect, } from "react";
-import { authReducer, reducerAction } from "~/useReducers/authReducer";
-import { User, Session } from "@supabase/supabase-js";
+import { createContext, useReducer, useState, useEffect, ReactNode, FC} from "react";
+import { authReducer} from "~/useReducers/authReducer";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
+
+type AuthProviderProps = {
+  children: ReactNode;
+};
 
 interface AuthContextType {
-  user: {} | null; 
+  user: object | null; 
   signUp: (email: string, password: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>
@@ -22,11 +25,9 @@ const INITAL_STATE = {
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: any) => {
+export const AuthProvider: FC <AuthProviderProps> = ({ children }: any) => {
   const router = useRouter();
   const supabaseClient = createClientComponentClient();
-  
-  const [state, dispatch] = useReducer(authReducer, INITAL_STATE);
 
 	const [user, setUser] = useState<{} | null>(null)
 
@@ -119,7 +120,7 @@ useEffect(() =>  {
 
   return (
     <AuthContext.Provider
-      value={{ ...state, signUp, login, updatePassword, passwordReset, signOut, user }}
+      value={{ ...INITAL_STATE, signUp, login, updatePassword, passwordReset, signOut, user }}
     >
       {children}
     </AuthContext.Provider>

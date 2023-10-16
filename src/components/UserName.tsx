@@ -1,6 +1,6 @@
 
 
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { AuthContext } from "~/useContext/authContext";
 export default function UserName() {
 

@@ -14,7 +14,7 @@ const Header = () => {
 
   const handeSignOut = async () => {
     if (auth) await auth.signOut(),
-    router.push('/')
+    router.push('/');
     else {
       console.log("No auth for signout");
     }
