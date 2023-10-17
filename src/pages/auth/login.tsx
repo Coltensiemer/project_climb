@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import Link from "next/link";
-import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
 
@@ -24,14 +23,13 @@ export default function Login() {
     const {email, password} = formData
 
     if (!email || !password) return console.log("Need Email or Password input")
-    console.log('attempt ot login')
+    console.log('Login Attempt')
     if (auth) {await auth.login(email, password); }
     
   };
 
   return (
     <>
-      <Header />
       <div className="mt-10 flex justify-center">
         <div className="w-full max-w-md">
           <h1 className="mb-6 text-2xl font-semibold">Login</h1>

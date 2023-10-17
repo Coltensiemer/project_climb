@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import Link from "next/link";
-import Header from "~/components/Header";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
 
@@ -29,7 +28,6 @@ export default function SignUp() {
   } 
   return (
     <>
-      <Header />
       <div className="mt-10 flex justify-center">
         <div className="w-full max-w-md">
           <h1 className="mb-6 text-2xl font-semibold">Sign Up</h1>

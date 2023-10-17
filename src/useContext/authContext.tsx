@@ -62,7 +62,7 @@ export const AuthProvider: FC <AuthProviderProps> = ({ children }: any) => {
         email: email,
         password: password,
       });
-      console.log(data)
+      console.log("data", data)
       router.push('/')
       if (error) throw error;
     } catch (error) {

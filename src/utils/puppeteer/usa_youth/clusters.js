@@ -2,7 +2,7 @@ import { Cluster } from "puppeteer-cluster";
 import { scrapeEvents } from "./puppeteer.js";
 
 async function clusters() {
-  //@ts-ignore
+  
   const urls = [];
   try {
     const eventListAll = await scrapeEvents();

@@ -6,6 +6,7 @@ import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { AuthProvider } from "~/useContext/authContext";
 import "~/styles/globals.css";
+import Header from "~/components/Header";
 
 
 function MyApp({
@@ -23,6 +24,7 @@ function MyApp({
       initialSession={pageProps.initialSession}
     >
       <AuthProvider>
+        <Header /> 
       <Component {...pageProps} />
       </AuthProvider>
     </SessionContextProvider>
