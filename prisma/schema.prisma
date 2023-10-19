@@ -2,7 +2,9 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["multiSchema"]
+    schemas         = ["public", "auth"]
 }
 
 datasource db {
@@ -14,8 +16,6 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-
-
 model Example {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
@@ -24,7 +24,7 @@ model Example {
 
 // Necessary for Next auth
 model Account {
-    id                Int      @id @default(autoincrement())
+    id                Int      @id @default(autoincrement())  
     userId            Int
     type              String
     provider          String
@@ -41,6 +41,7 @@ model Account {
     user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+ 
 }
 
 model Session {
@@ -86,10 +87,9 @@ model Gym {
 model USAClimbingEvents {
     id         Int               @id @default(autoincrement())
     event      String
-    resultsURL String           @unique
+    resultsURL String            @unique
     results    USAEventResults[]
     createdAt  DateTime          @default(now())
-
 }
 
 model USAEventResults {
@@ -99,7 +99,6 @@ model USAEventResults {
     location String
     date     String
     climbers ClimberResult[]
-
 }
 
 model ClimberResult {
@@ -114,7 +113,7 @@ model ClimberResult {
 
 model Climber {
     id              Int             @id @default(autoincrement())
-    name            String          
+    name            String
     region          String
     categroy        String?
     qe_rank_boulder Int?
@@ -125,8 +124,8 @@ model Climber {
     team            Teams           @relation(fields: [teamId], references: [id])
     teamId          Int
     results         ClimberResult[]
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    createdAt       DateTime        @default(now())
+    updatedAt       DateTime        @updatedAt
 }
 
 model Teams {
@@ -138,6 +137,6 @@ model Teams {
     website   String?
     contact   String?
     climbers  Climber[]
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
 }

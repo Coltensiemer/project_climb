@@ -2,6 +2,7 @@ import { createContext, useReducer, useState, useEffect, ReactNode, FC} from "re
 import { authReducer} from "~/useReducers/authReducer";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { SignIn } from "@supabase/auth-ui-react";
 
 
 type AuthProviderProps = {
@@ -23,7 +24,7 @@ const INITAL_STATE = {
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider: FC <AuthProviderProps> = ({ children }: any) => {
+export const AuthProvider: FC <AuthProviderProps> = ({ children }) => {
   const router = useRouter();
   const supabaseClient = createClientComponentClient();
 
@@ -116,7 +117,7 @@ useEffect(() =>  {
 		console.log(user)
 	}
 	getUser()
-}, [login, signOut])
+}, [signOut, SignIn])
 
 
 
