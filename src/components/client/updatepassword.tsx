@@ -9,7 +9,7 @@ interface formType {
   confirmPassword: string,
 }
 
-export default function SignUp() {
+export default function Updatepassword() {
   const auth = useContext(AuthContext);
 
   const [formData, setFormData] = useState<formType>({
