@@ -1,8 +1,8 @@
 import React from 'react'
 import Updatepassword from '~/components/client/updatepassword'
 
-export default function UpdatePassword() {
+export default function UpdatePasswordPage() {
   return (
-	<UpdatePassword /> 
+<Updatepassword  /> 
   )
 }
