@@ -16,8 +16,3 @@ export default function Home() {
   );
 }
 
-
-
-
-
-

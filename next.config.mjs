@@ -7,7 +7,7 @@ import("./src/env.mjs");
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-
+experimental: {appDir: true },
   /**
    * If you are using `appDir` then you must comment the below `i18n` config out.
    *

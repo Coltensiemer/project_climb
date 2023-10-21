@@ -40,6 +40,8 @@ List any prerequisites that users need to have installed before they can run you
 
 ### prisma 
 [https://www.prisma.io/docs/reference/api-reference/command-reference]
+
+
 1. npx prisma [command]
   1. db **manage DB scheme by using push**
   2. Mirgrate  

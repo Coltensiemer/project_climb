@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -8,7 +10,7 @@ interface formType {
   password: string
 }
 
-export default function Login() {
+export function Login() {
   const auth = useContext(AuthContext)
 
   const [formData, setFormData] = useState<formType>({
@@ -92,3 +94,4 @@ export default function Login() {
     </>
   );
 }
+

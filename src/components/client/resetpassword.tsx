@@ -1,13 +1,13 @@
-
+'use client'
 
 import React, { useState, useContext } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "~/useContext/authContext";
-import { useRouter } from "next/router";
 
 
-export default function Resetpassword() {
+
+export  function Resetpassword() {
   const auth = useContext(AuthContext);
   const [formData, setFormData] = useState({
   email: ""

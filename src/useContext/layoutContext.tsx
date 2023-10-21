@@ -1,3 +1,4 @@
+"use client"
 
 import { AppProps, type AppType } from "next/app";
 import { useState } from "react";
@@ -9,26 +10,29 @@ import "~/styles/globals.css";
 import Header from "~/components/client/Header";
 
 
-function MyApp({
-  Component,
-  pageProps,
-}: AppProps<{
-  initialSession: Session
-}>) {
-  // Create a new supabase browser client on every first render.
-  const [supabaseClient] = useState(() => createPagesBrowserClient())
 
+
+
+export function LayoutProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+
+  const [supabaseClient] = useState(() => createPagesBrowserClient())
   return (
-    <SessionContextProvider
+
+      
+      <SessionContextProvider
       supabaseClient={supabaseClient}
-      initialSession={pageProps.initialSession}
+      // initialSession={pageProps.initialSession}
     >
       <AuthProvider>
         <Header /> 
-      <Component {...pageProps} />
+   {children}
       </AuthProvider>
     </SessionContextProvider>
+    
+ 
   )
 }
-
-export default MyApp;

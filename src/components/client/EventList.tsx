@@ -1,3 +1,4 @@
+'use client'
 
 import React, { useEffect, useState } from "react";
 import { supabaseLocal } from "supabaseClient";
@@ -10,6 +11,11 @@ interface Events {
 
 export default function EventList() {
   const [events, setEvents] = useState<Events[]>([]);
+
+
+  /// Update to fetch on server 
+  // remove state, pass down as props to this client
+  // use logic! 
 
   const handleEventList = async () => {
     try {
