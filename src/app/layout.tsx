@@ -1,6 +1,6 @@
 
 import { LayoutProvider } from "~/useContext/layoutContext";
-
+import HeroLanding from "~/components/client/HeroLanding";
 
 
 export const metadata = {
@@ -17,7 +17,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <body>
       <LayoutProvider>{children}</LayoutProvider>
+      </body>
     </html>
   )
 }
