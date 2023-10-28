@@ -1,8 +1,6 @@
 
 import puppeteer from "puppeteer";
-import { createClient } from "@supabase/supabase-js";
 import 'dotenv/config'
-
 
 
 
@@ -34,17 +32,17 @@ return eventListAll
 
 
 
-async function upsertEvents() { 
+// async function upsertEvents() { 
 
-  const events = await scrapeEvents()
+//   const events = await scrapeEvents()
 
-  const { data, error } = await supabase.from('USAClimbingEvents').upsert(events, { onConflict: 'resultsURL', ignoreDuplicates: true})
+//   const { data, error } = await supabase.from('USAClimbingEvents').upsert(events, { onConflict: 'resultsURL', ignoreDuplicates: true})
 
-  if (error) {
-    console.error('Error pushing data to Supabase:', error, events);
-  } else {
-    console.log('Data pushed to Supabase successfully:');
-  }
-}
+//   if (error) {
+//     console.error('Error pushing data to Supabase:', error, events);
+//   } else {
+//     console.log('Data pushed to Supabase successfully:');
+//   }
+// }
 
-upsertEvents()
+// upsertEvents()

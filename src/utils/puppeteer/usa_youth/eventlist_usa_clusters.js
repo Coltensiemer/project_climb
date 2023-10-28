@@ -53,7 +53,6 @@ async function clusters() {
       }
     });
 
-    //@ts-ignore
     for (const url of urls) {
       await cluster.queue(url);
     }
