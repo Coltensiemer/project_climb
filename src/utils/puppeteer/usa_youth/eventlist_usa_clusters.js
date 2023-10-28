@@ -1,5 +1,5 @@
 import { Cluster } from "puppeteer-cluster";
-import { scrapeEvents } from "./puppeteer.js";
+import { scrapeEvents } from "./eventlist_usa.js";
 
 async function clusters() {
   

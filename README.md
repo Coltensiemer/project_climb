@@ -38,7 +38,7 @@ List any prerequisites that users need to have installed before they can run you
    git clone https://github.com/yourusername/your-project.git
 
 
-### prisma 
+### Prisma 
 [https://www.prisma.io/docs/reference/api-reference/command-reference]
 
 
